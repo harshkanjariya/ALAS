@@ -1,0 +1,3 @@
+{
+	"signup/[a-z]{4}/hello":"public/index.php?id={1}"
+}
