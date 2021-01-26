@@ -1,5 +1,4 @@
 <?php
-
 $default_timezone='Asia/Kolkata';
 
 $cookie_name='user';
@@ -12,7 +11,7 @@ $jsroot='/ADAS';
 
 $admin_email='example@gmail.com';
 $admin_password='xyzxyz';
-$admin_name='Adas';
+$admin_name='Admin_name';
 $recieve_email='example@gmail.com';
 
 $database_url='localhost';

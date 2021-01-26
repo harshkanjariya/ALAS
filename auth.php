@@ -1,3 +1,0 @@
-<?php
-$auth='empl';
-?>

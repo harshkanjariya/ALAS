@@ -2,6 +2,8 @@
 require(__DIR__.'/config.php');
 require(__DIR__.'/security.php');
 require(__DIR__.'/extra_functions.php');
+require(__DIR__ . '/main_classes/Database.class.php');
+require(__DIR__ . '/main_classes/Route.class.php');
 spl_autoload_register(function($classname){
 	if(!class_exists($classname));
 		require_once(__DIR__.'/classes/'.$classname.'.class.php');

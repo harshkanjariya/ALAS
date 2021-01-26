@@ -4,7 +4,7 @@ class User{
     function __construct(){
     }
     function select(){
-        return db()->select('employee',"employee_id=?",array('emplitrack$5'));
+        return db()->select('users');
     }
     function insert(){
         return db()->insert('users',array(
