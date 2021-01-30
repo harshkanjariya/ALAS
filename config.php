@@ -2,6 +2,7 @@
 $default_timezone='Asia/Kolkata';
 
 $cookie_name='user';
+//$url='http://192.168.0.114';
 $url='http://localhost';
 if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
 	$root='/xampp/htdocs/ADAS';
@@ -18,4 +19,5 @@ $database_url='localhost';
 $database_username='root';
 $database_password='';
 $database_name='test';
-?>
+
+$access_denied = true;

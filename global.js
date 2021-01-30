@@ -51,6 +51,34 @@ function dateFormat(f,d){
 
 	return f;
 }
+function customEval(text){
+	var inner = text.trim();
+	if (inner.startsWith('{{') && inner.endsWith('}}')) {
+		inner = inner.substring(2, inner.length - 2).trim();
+		return eval(inner);
+	}else{
+		return inner;
+	}
+}
+$(document).ready(updateData);
+function isHTML(str) {
+	var a = document.createElement('div');
+	a.innerHTML = str;
+	for (var c = a.childNodes, i = c.length; i--; ) {
+		if (c[i].nodeType === 1) return true;
+	}
+	return false;
+}
+function applyScriptables() {
+	$('.script').each(function (i, e) {
+		var inner = e.innerHTML.trim();
+		var re = /{{([^}]+)}}/g;
+		inner = inner.replace(re, function (a, b) {
+			return eval(b);
+		});
+		e.innerHTML = inner;
+	});
+}
 function deleteCookie(name,path){
 	var cukis=document.cookie.split(';');
 	for(var i=0;i<cukis.length;i++){
@@ -130,8 +158,8 @@ function validate(count){
 				}
 			}
 			else if(group[i].name==='phone'
-					|| group[i].name==='mobile'
-					|| group[i].name=== 'company_phone'){
+				|| group[i].name==='mobile'
+				|| group[i].name=== 'company_phone'){
 				if(!/(^\+?[1-9][0-9]{8,15})/.test(group[i].value) && group[i].value.length<15){
 					$(group[i]).addClass('is-invalid');
 					error_show(0,'Please enter valid phone number');
@@ -153,24 +181,24 @@ function validate(count){
 					$(group[i]).addClass('is-valid');
 				}
 			}else if(group[i].name=='id'){
-                var value = $(group[i]).data('work');
-			    if(value=='id'){
-    				if((!/(^[a-z0-9][a-z0-9\-]+[a-z0-9]$)/.test(group[i].value))){
-    				    $(group[i]).addClass('is-invalid');
-    					group[i].focus();
-        				error_show(0,'Company URL is not valid format. URL must be greater than 2 character');
-                        done=false;
-    				}
-    				else if(group[i].length < 2 || group[i].length > 20){
-        				$(group[i]).addClass('is-invalid');
-    					group[i].focus();	
-        				error_show(0,'Company URL is must be greater than 2 and less than 20 character');
-    				    done=false;
-    				}else{
-    					$(group[i]).removeClass('is-invalid');
-    					$(group[i]).addClass('is-valid');
-    				}
-			    }
+				var value = $(group[i]).data('work');
+				if(value=='id'){
+					if((!/(^[a-z0-9][a-z0-9\-]+[a-z0-9]$)/.test(group[i].value))){
+						$(group[i]).addClass('is-invalid');
+						group[i].focus();
+						error_show(0,'Company URL is not valid format. URL must be greater than 2 character');
+						done=false;
+					}
+					else if(group[i].length < 2 || group[i].length > 20){
+						$(group[i]).addClass('is-invalid');
+						group[i].focus();
+						error_show(0,'Company URL is must be greater than 2 and less than 20 character');
+						done=false;
+					}else{
+						$(group[i]).removeClass('is-invalid');
+						$(group[i]).addClass('is-valid');
+					}
+				}
 			}else if(group[i].type=='checkbox'){
 				var val=[];
 				$('input[name='+group[i].name+']').each(function(){
@@ -189,7 +217,7 @@ function validate(count){
 			}
 		}
 		else if(group[i].nodeName=='TEXTAREA'){
-			if(group[i].value==''){ 
+			if(group[i].value==''){
 				$(group[i]).addClass('is-invalid');
 				error_show(0,"please enter "+group[i].name);
 				group[i].focus();
@@ -251,7 +279,7 @@ $('.small-card').click(function(){
 	var id=$(this).html().replace(/(\s|\&nbsp;)+/g,"");
 	$('.small-card').removeClass('active-card');
 	$(this).addClass('active-card');
-	
+
 	$('.dis-here').removeClass('dis-here-active');
 	$('#'+id).addClass('dis-here-active');
 });
@@ -273,7 +301,7 @@ function random_string(n,s='aA1'){
 		a+='@#$%^?&.,\'";:+-*/';
 	}
 	var r='';
-	for (var i=0;i<n;i++) { 
+	for (var i=0;i<n;i++) {
 		r+=a[Math.floor(Math.random()* a.length)];
 	}
 	return r;
@@ -290,7 +318,7 @@ function otpButton(clasn,sec,text,destinationClass='NaN'){
 		var iId=setInterval(function(){
 			sec--;
 			$('.'+clasn).html(text+' '+sec+'&nbsp;&nbsp;');
-			if(sec<=0){ 
+			if(sec<=0){
 				$('.'+clasn).html(oldtext);
 				$('.'+clasn).removeClass('spinner spinner-white spinner-right');
 				$('.'+clasn).prop('disabled',false);
@@ -311,17 +339,17 @@ function error_show(bol,text,reload=false){
 		icn='success';
 	}
 	swal.fire({
-        text:text,
-        icon: icn,
-        buttonsStyling: false,
-        confirmButtonText: "Ok, got it!",
-        customClass: {
+		text:text,
+		icon: icn,
+		buttonsStyling: false,
+		confirmButtonText: "Ok, got it!",
+		customClass: {
 			confirmButton: "btn font-weight-bold btn-light-primary"
 		}
-    }).then(function() {
-    	if(reload){
+	}).then(function() {
+		if(reload){
 			location.reload();
-    	}
+		}
 		//KTUtil.scrollTop();
 	});
 }
@@ -331,14 +359,14 @@ function error_show_link(bol,text,link=null){
 		icn='success';
 	}
 	swal.fire({
-        text:text,
-        icon: icn,
-        buttonsStyling: false,
-        confirmButtonText: "Ok, got it!",
-        customClass: {
+		text:text,
+		icon: icn,
+		buttonsStyling: false,
+		confirmButtonText: "Ok, got it!",
+		customClass: {
 			confirmButton: "btn font-weight-bold btn-light-primary"
 		}
-    }).then(function() {
+	}).then(function() {
 		if(link!=null)
 			location.replace(link);
 		//KTUtil.scrollTop();
@@ -350,14 +378,14 @@ function autoNextPage(bol,text){
 		icn='success';
 	}
 	swal.fire({
-        text:text,
-        icon: icn,
-        buttonsStyling: false,
-        confirmButtonText: "Ok, got it!",
-        customClass: {
+		text:text,
+		icon: icn,
+		buttonsStyling: false,
+		confirmButtonText: "Ok, got it!",
+		customClass: {
 			confirmButton: "btn font-weight-bold btn-light-primary"
 		}
-    }).then(function() {
+	}).then(function() {
 		KTUtil.scrollTop();
 	});
 	setTimeout(function(){
@@ -366,15 +394,15 @@ function autoNextPage(bol,text){
 }
 function scrollTop(){
 	document.body.scrollTop = 0; // For Safari
- 	document.documentElement.scrollTop = 0; 
+	document.documentElement.scrollTop = 0;
 }
 function btnon(classname,obj=false){
-    if(!obj)classname='.'+classname;
+	if(!obj)classname='.'+classname;
 	$(classname).removeClass('spinner spinner-white spinner-right');
 	$(classname).attr('disabled',false);
 }
 function btnoff(classname,obj=false){
-    if(!obj)classname='.'+classname;
+	if(!obj)classname='.'+classname;
 	$(classname).addClass('spinner spinner-white spinner-right');
 	$(classname).attr('disabled',true);
 }
@@ -435,12 +463,12 @@ function img_model_add(arr){
 		var first=arr[0];
 		$('.img-model-main img',parent).attr('src',first);
 		$(".img-model-mutiple",parent).append('<img src="'+first+'" class="adas-img-caros">');
-		if(arr.length >1){	
+		if(arr.length >1){
 			for (var i = 1; i < arr.length; i++) {
 				$(".img-model-mutiple",parent).append('<img src="'+arr[i]+'" >');
 			}
 		}
-	img_model_toggle();	
+		img_model_toggle();
 	}
 }
 
@@ -450,43 +478,43 @@ function img_model_add_string(...arr){
 	img_model_add(temp);
 }
 function confirm_show(text="You won't be able to revert this!"){
-var x =	Swal.fire({
-	  title: 'Are you sure?',
-	  text: text,
-	  icon: 'warning',
-	  showCancelButton: true,
-	  confirmButtonColor: '#d33',
-	  cancelButtonColor: '#3085d6',
-	  confirmButtonText: 'Yes, delete it!'
+	var x =	Swal.fire({
+		title: 'Are you sure?',
+		text: text,
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#d33',
+		cancelButtonColor: '#3085d6',
+		confirmButtonText: 'Yes, delete it!'
 	}).then((result) => {
-	   return result.isConfirmed;
+		return result.isConfirmed;
 	});
 	console.log(x);
-} 
+}
 function deleteRow(obj){
-    $(obj).closest('tr').remove();
-    $('#datatable tbody tr').each(function(i){            
-        $($(this).find('td')[0]).html(i+1);
-    });
+	$(obj).closest('tr').remove();
+	$('#datatable tbody tr').each(function(i){
+		$($(this).find('td')[0]).html(i+1);
+	});
 }
 $(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	var fileName = $(this).val().split("\\").pop();
+	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 
 $('form').on('focus', 'input[type=number]', function (e) {
-  $(this).on('wheel.disableScroll', function (e) {
-    e.preventDefault()
-  })
+	$(this).on('wheel.disableScroll', function (e) {
+		e.preventDefault()
+	})
 })
 $('form').on('blur', 'input[type=number]', function (e) {
-  $(this).off('wheel.disableScroll')
+	$(this).off('wheel.disableScroll')
 })
 
 $(document).ready(function(){
-    $('.noCaps').on('input', function(){
-        $(this).val($(this).val().toLowerCase());
-    })
+	$('.noCaps').on('input', function(){
+		$(this).val($(this).val().toLowerCase());
+	})
 });
 function calculateDistance(point1,point2){
 	lat1=point1[0];
@@ -546,26 +574,26 @@ function calculateDistance(point1,point2){
 		var uSquared = cosSqAlpha * aSqMinusBSqOverBSq; // defn
 		A = 1 + (uSquared / 16384.0) * // (3)
 			(4096.0 + uSquared *
-			 (-768 + uSquared * (320.0 - 175.0 * uSquared)));
+				(-768 + uSquared * (320.0 - 175.0 * uSquared)));
 		var B = (uSquared / 1024.0) * // (4)
 			(256.0 + uSquared *
-			 (-128.0 + uSquared * (74.0 - 47.0 * uSquared)));
+				(-128.0 + uSquared * (74.0 - 47.0 * uSquared)));
 		var C = (f / 16.0) *
 			cosSqAlpha *
 			(4.0 + f * (4.0 - 3.0 * cosSqAlpha)); // (10)
 		var cos2SMSq = cos2SM * cos2SM;
 		deltaSigma = B * sinSigma * // (6)
 			(cos2SM + (B / 4.0) *
-			 (cosSigma * (-1.0 + 2.0 * cos2SMSq) -
-			  (B / 6.0) * cos2SM *
-			  (-3.0 + 4.0 * sinSigma * sinSigma) *
-			  (-3.0 + 4.0 * cos2SMSq)));
+				(cosSigma * (-1.0 + 2.0 * cos2SMSq) -
+					(B / 6.0) * cos2SM *
+					(-3.0 + 4.0 * sinSigma * sinSigma) *
+					(-3.0 + 4.0 * cos2SMSq)));
 
 		lambda = L +
 			(1.0 - C) * f * sinAlpha *
 			(sigma + C * sinSigma *
-			 (cos2SM + C * cosSigma *
-			  (-1.0 + 2.0 * cos2SM * cos2SM))); // (11)
+				(cos2SM + C * cosSigma *
+					(-1.0 + 2.0 * cos2SM * cos2SM))); // (11)
 
 		var delta = (lambda - lambdaOrig) / lambda;
 		if (Math.abs(delta) < 1.0e-12) {
@@ -578,7 +606,7 @@ function calculateDistance(point1,point2){
 		cosU1 * sinU2 - sinU1 * cosU2 * cosLambda);
 	initialBearing *= 180.0 / Math.PI;
 	var finalBearing = Math.atan2(cosU1 * sinLambda,
-			-sinU1 * cosU2 + cosU1 * sinU2 * cosLambda);
+		-sinU1 * cosU2 + cosU1 * sinU2 * cosLambda);
 	finalBearing *= 180.0 / Math.PI;
 
 	return mTotalDistance;
