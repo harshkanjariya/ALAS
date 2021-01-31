@@ -47,7 +47,7 @@ if ($result['status']!='success'){
 </div>
 <?php require("$root/public/post_libs.php"); ?>
 <script type="text/javascript">
-    var data = '<?=$cipher?>';
+    var adas_data = '<?=$cipher?>';
     var x='{{{abc,ghi}}}';
 </script>
 </body>
