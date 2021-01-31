@@ -26,10 +26,9 @@ if ($result['status']!='success'){
 		echo "</tr>";
 	}
 
-	$key = "abcdefgh";
 	$arr = array("abc"=>array("def"=>"qwer","ghi"=>"tyui"));
 	$str = json_encode($arr);
-	$cipher = encrypt($str,$key);
+	$cipher = encrypt($str);
 	?>
 </table>
 <div>
