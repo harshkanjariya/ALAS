@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^(.*)$ route.php [L]
+RewriteRule ^(.*)$ route.php [L,QSA]

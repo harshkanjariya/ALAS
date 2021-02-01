@@ -60,7 +60,7 @@ function customEval(text){
 		return inner;
 	}
 }
-$(document).ready(updateData);
+// $(document).ready(updateData);
 function isHTML(str) {
 	var a = document.createElement('div');
 	a.innerHTML = str;
@@ -69,15 +69,21 @@ function isHTML(str) {
 	}
 	return false;
 }
-function applyScriptables() {
-	$('.script').each(function (i, e) {
-		var inner = e.innerHTML.trim();
-		var re = /{{([^}]+)}}/g;
-		inner = inner.replace(re, function (a, b) {
-			return eval(b);
-		});
-		e.innerHTML = inner;
+function applyScriptables(show_error=false) {
+	var inner = document.body.innerHTML;
+	var re = /{{([^}]+)}}/g;
+	inner = inner.replace(re, function (a, b) {
+		console.log(a);
+		var ans;
+		try{
+			ans = eval(b);
+		}catch (e) {
+			ans = a;
+			if (show_error) console.error(e);
+		}
+		return ans;
 	});
+	document.body.innerHTML = inner;
 }
 function deleteCookie(name,path){
 	var cukis=document.cookie.split(';');

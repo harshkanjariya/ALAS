@@ -13,6 +13,7 @@ if ($result['status']!='success'){
     <link href="css/abc.css" rel="stylesheet">
 </head>
 <body>
+<img src="public/assets/bird.jpg" alt="bird">
 <table>
     <tr>
         <td>Name</td>
@@ -34,21 +35,12 @@ if ($result['status']!='success'){
 <div>
     <input type="text" name="txt" value="{{{abc,def}}}">
 </div>
-<div class="script">
-    <div>
-        {{x+x}}
-    </div>
-    <div>
-        {{x}}
-        <div>
-            {{ x[0]}}
-        </div>
-    </div>
-</div>
+<div>{{{{{x}}}}}</div>
+
 <?php require("$root/public/post_libs.php"); ?>
 <script type="text/javascript">
     var adas_data = '<?=$cipher?>';
-    var x='{{{abc,ghi}}}';
+    var x='abc,def';
 </script>
 </body>
 </html>

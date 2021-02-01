@@ -1,6 +1,5 @@
 <?php
 require(__DIR__."/functions.php");
-
 Route::add('delete',function(){
 	$u=new User();
 	$u->delete();
