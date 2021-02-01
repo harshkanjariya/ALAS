@@ -1,2 +1,3 @@
 RewriteEngine On
+RewriteCond %{REQUEST_URI} (\.(php|html|js|css))?$
 RewriteRule ^(.*)$ route.php [L,QSA]
