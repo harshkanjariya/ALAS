@@ -9,7 +9,6 @@ Route::add('hello',function(){
 	require(__DIR__.'/public/test.php');
 });
 $folders = array(
-	'myfolder'
 );
 foreach ($folders as $folder){
 	require(__DIR__."/public/$folder/route.php");

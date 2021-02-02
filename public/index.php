@@ -10,10 +10,10 @@ if ($result['status']!='success'){
 <head>
     <title>ADAS</title>
 	<?php require("$root/public/pre_libs.php"); ?>
-    <link href="css/abc.css" rel="stylesheet">
+    <link href="assets/css/abc.css?id=kasnd738" rel="stylesheet">
 </head>
 <body>
-<img src="public/assets/bird.jpg" alt="bird">
+<img src="assets/bird.jpg" alt="bird">
 <table>
     <tr>
         <td>Name</td>
