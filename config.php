@@ -20,4 +20,4 @@ $database_username='root';
 $database_password='';
 $database_name='test';
 
-$access_denied = true;
+$access_denied = false;

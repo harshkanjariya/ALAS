@@ -1,11 +1,11 @@
 <?php
-Route::add('.*\.(jpg|png|svg|webp|ico|mp4|mp3)',function(){
-	$uri = $_SERVER['REQUEST_URI'];
-	$uri = substr($uri, strpos($uri,'/',1)+1);
-	readfile('public/'.$uri);
+//Route::add('.*\.(jpg|png|svg|webp|ico|mp4|mp3)',function(){
+//	$uri = $_SERVER['REQUEST_URI'];
+//	$uri = substr($uri, strpos($uri,'/',1)+1);
+//	readfile('public/'.$uri);
 //	global $jsroot;
 //	header("Location: $jsroot/public/$uri");
-});
+//});
 Route::add('global.css',function (){
 	header("Content-Type: text/css");
 	require(__DIR__.'/global.css');
@@ -22,6 +22,9 @@ Route::add('global.js',function (){
 Route::add('[a-zA-Z0-9/_\.\-]+\.css',function (){
 	$uri = $_SERVER['REQUEST_URI'];
 	$uri = substr($uri, strpos($uri,'/',1)+1);
+	if (strpos($uri,'?')!==false)
+		$uri = substr($uri,0, strpos($uri,'?'));
+	header("Content-Type: text/css");
 	require(__DIR__ . '/public/' .$uri);
 });
 Route::add('[a-zA-Z0-9/_\.\-]+\.js',function (){
@@ -33,6 +36,8 @@ Route::add('[a-zA-Z0-9/_\.\-]+\.js',function (){
     ";
 	$uri = $_SERVER['REQUEST_URI'];
 	$uri = substr($uri, strpos($uri,'/',1)+1);
+	if (strpos($uri,'?')!==false)
+		$uri = substr($uri,0, strpos($uri,'?'));
 	require(__DIR__.'/public/'.$uri);
 });
 Route::add('',function(){

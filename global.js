@@ -71,9 +71,8 @@ function isHTML(str) {
 }
 function applyScriptables(show_error=false) {
 	var inner = document.body.innerHTML;
-	var re = /{{([^}]+)}}/g;
+	var re = /{{([^{}]+)}}/g;
 	inner = inner.replace(re, function (a, b) {
-		console.log(a);
 		var ans;
 		try{
 			ans = eval(b);

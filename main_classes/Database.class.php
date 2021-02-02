@@ -117,8 +117,11 @@ class Database{
         return $this->query($sql,$update_params);
     }
 	function multi_query($sql){
-		$result=mysqli_multi_query($this->db,$sql);
-		$this->error=mysqli_error($this->db);
-		return $result;
+		if($this->db->exec($sql)) {
+			$this->json['status']='success';
+		}else{
+			$this->json['error']=$this->db->errorInfo();
+		}
+		return $this->json;
 	}
 }
