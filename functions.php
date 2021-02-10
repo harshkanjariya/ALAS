@@ -26,6 +26,14 @@ function allow_only($str, $allowed){
     }
     return $str;
 }
+function pre($ar){
+	echo "<pre>";
+	if (is_array($ar))
+		print_r($ar);
+	else
+		echo $ar;
+	echo "</pre>";
+}
 function upload_file($file,$path){
 	$tmp=$file['tmp_name'];
 	if(move_uploaded_file($tmp,$path)){

@@ -5,7 +5,7 @@ class Route{
 	private static $pathNotFound = null;
 	private static $methodNotAllowed = null;
 
-	public static function add($expression, $function, $method = 'get', $acccess_outside = false){
+	public static function add($expression, $function, $method = '', $acccess_outside = false){
 		global $jsroot;
 		array_push(self::$routes,Array(
 			'expression' => $jsroot.'/'.$expression,
@@ -67,7 +67,7 @@ class Route{
 				$path_match_found = true;
 
 				// Check method match
-				if(strtolower($method) == strtolower($route['method'])){
+				if($route['method']==='' or strtolower($method) == strtolower($route['method'])){
 
 					array_shift($matches);// Always remove first element. This contains the whole string
 

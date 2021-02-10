@@ -40,8 +40,8 @@ Route::add('[a-zA-Z0-9/_\.\-]+\.js',function (){
 		$uri = substr($uri,0, strpos($uri,'?'));
 	require(__DIR__.'/public/'.$uri);
 });
-Route::add('',function(){
+Route::add('(index.php)?',function(){
 	global $url,$root,$jsroot,$cookie_name;
 	require(__DIR__.'/public/index.php');
-},'get',true);
+},'',true);
 Route::run();
