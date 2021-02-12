@@ -114,13 +114,14 @@ if (isset($_POST['txt'])){
         <input type="submit">
     </form>
 </div>
-<div>{{{{{{{y}}}}}}}</div>
+<div id="mydiv">{{{{{{{y}}}}}}}</div>
 
 <?php require("$root/public/post_libs.php"); ?>
 <script type="text/javascript">
     var adas_data = '<?=$cipher?>';
     var x='abc,def';
     var y='x';
+    applyScriptables();
     applyScriptables();
 </script>
 </body>
