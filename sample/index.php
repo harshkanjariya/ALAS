@@ -8,7 +8,7 @@ if ($result['status']!='success'){
 ?>
 <html lang="en">
 <head>
-    <title>ADAS</title>
+    <title>ALAS</title>
 	<?php require("$root/public/pre_libs.php"); ?>
     <link href="css/abc.css" rel="stylesheet">
 </head>

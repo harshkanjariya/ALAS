@@ -6,7 +6,7 @@ if (isset($_POST['txt'])){
 ?>
 <html lang="en">
 <head>
-    <title>ADAS</title>
+    <title>ALAS</title>
 	<?php require("$root/public/pre_libs.php"); ?>
     <link href="assets/css/abc.css" rel="stylesheet">
     <style>
@@ -64,7 +64,7 @@ if (isset($_POST['txt'])){
             stroke: #1bc5bd;
             stroke-miterlimit: 10;
             margin: 10% auto;
-            box-shadow: inset 0px 0px 0px #1bc5bd;
+            box-shadow: inset 0 0 0 #1bc5bd;
             animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
         }
 
@@ -103,16 +103,23 @@ if (isset($_POST['txt'])){
         <td>Password</td>
     </tr>
 	<?php
-	$arr = array("abc"=>array("def"=>"qwer","ghi"=>"tyui"));
+	$arr = array(
+	        "abc"=>array(
+	            "def"=>"qwer",
+                "ghi"=>"tyui"
+            )
+    );
 	$str = json_encode($arr);
 	$cipher = encrypt($str);
 	?>
 </table>
 <div>
     <form action="index.php" method="post">
-        <input type="text" name="txt" value="{{{abc,def}}}">
+        <label for="txt"></label>
+        <input type="text" id="txt" name="txt" value="{{{abc,def}}}"/>
         <input type="submit">
     </form>
+    <div class="hello">hii</div>
 </div>
 <div id="mydiv">{{{{{{{y}}}}}}}</div>
 
@@ -121,6 +128,7 @@ if (isset($_POST['txt'])){
     var adas_data = '<?=$cipher?>';
     var x='abc,def';
     var y='x';
+    Dialog.alert('hello');
     applyScriptables();
     applyScriptables();
 </script>

@@ -10,6 +10,16 @@ Route::add('global.css',function (){
 	header("Content-Type: text/css");
 	require(__DIR__.'/global.css');
 });
+Route::add('.*\.wasm',function (){
+	header("Content-Type: application/wasm");
+	$uri = $_SERVER['REQUEST_URI'];
+	$uri = substr($uri, strrpos($uri,'/')+1);
+	require(__DIR__.'/public/cpp/'.$uri);
+});
+Route::add('security.js',function (){
+	header("Content-Type: text/css");
+	require(__DIR__.'/public/cpp/security.js');
+});
 Route::add('global.js',function (){
 	global $url,$jsroot;
 	header("Content-Type: text/javascript");

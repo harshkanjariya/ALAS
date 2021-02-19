@@ -5,10 +5,10 @@ $cookie_name='user';
 //$url='http://192.168.0.114';
 $url='http://localhost';
 if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
-	$root='/xampp/htdocs/ADAS';
+	$root='/xampp/htdocs/ALAS';
 else
-	$root='/opt/lampp/htdocs/ADAS';
-$jsroot='/ADAS';
+	$root='/opt/lampp/htdocs/ALAS';
+$jsroot='/ALAS';
 
 $admin_email='example@gmail.com';
 $admin_password='xyzxyz';
@@ -20,4 +20,4 @@ $database_username='root';
 $database_password='';
 $database_name='test';
 
-$access_denied = false;
+$access_denied = true;
