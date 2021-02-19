@@ -51,23 +51,20 @@ function dateFormat(f,d){
 
 	return f;
 }
-function customEval(text){
-	var inner = text.trim();
-	if (inner.startsWith('{{') && inner.endsWith('}}')) {
-		inner = inner.substring(2, inner.length - 2).trim();
-		return eval(inner);
-	}else{
-		return inner;
-	}
-}
-// $(document).ready(updateData);
-function isHTML(str) {
-	var a = document.createElement('div');
-	a.innerHTML = str;
-	for (var c = a.childNodes, i = c.length; i--; ) {
-		if (c[i].nodeType === 1) return true;
-	}
-	return false;
+function updateData(el){
+	var e = el?el:document.body;
+	var inner = e.innerHTML;
+	var re = /{{{([^{}]+)}}}/g;
+	var dected = JSON.parse(Module.convert(alas_data));
+	inner = inner.replace(re, function (a, b) {
+		var keys = b.split(",");
+		var val = dected;
+		keys.forEach(function(e){
+			val = val[e];
+		});
+		return val===undefined?b:val;
+	});
+	e.innerHTML = inner;
 }
 function applyScriptables(show_error=false) {
 	var inner = document.body.innerHTML;
