@@ -21,7 +21,7 @@ Route::add('security.js',function (){
 	require(__DIR__.'/public/cpp/security.js');
 });
 Route::add('global.js',function (){
-	global $url,$jsroot;
+	extract($GLOBALS);
 	header("Content-Type: text/javascript");
 	echo "
         var url = '$url';
@@ -38,7 +38,7 @@ Route::add('[a-zA-Z0-9/_\.\-]+\.css',function (){
 	require(__DIR__ . '/public/' .$uri);
 });
 Route::add('[a-zA-Z0-9/_\.\-]+\.js',function (){
-	global $url,$jsroot;
+	extract($GLOBALS);
 	header("Content-Type: text/javascript");
 	echo "
         var url = '$url';
@@ -50,8 +50,11 @@ Route::add('[a-zA-Z0-9/_\.\-]+\.js',function (){
 		$uri = substr($uri,0, strpos($uri,'?'));
 	require(__DIR__.'/public/'.$uri);
 });
-Route::add('(index.php)?',function(){
-	global $url,$root,$jsroot,$cookie_name,$lang;
-	require(__DIR__.'/public/index.php');
+Route::add('(index.(php|html))?',function(){
+	extract($GLOBALS);
+	if (file_exists(__DIR__.'/public/index.php'))
+		require(__DIR__.'/public/index.php');
+	else
+		require(__DIR__.'/public/index.html');
 },'',true);
 Route::run();

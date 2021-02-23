@@ -2,6 +2,7 @@
 require(__DIR__.'/config.php');
 require(__DIR__.'/language.php');
 require(__DIR__.'/security.php');
+require(__DIR__.'/libs.php');
 require(__DIR__.'/extra_functions.php');
 require(__DIR__ . '/main_classes/Database.class.php');
 require(__DIR__ . '/main_classes/Route.class.php');
@@ -27,7 +28,7 @@ function allow_only($str, $allowed){
     }
     return $str;
 }
-function pre($ar){
+function prt($ar){
 	echo "<pre>";
 	if (is_array($ar))
 		print_r($ar);

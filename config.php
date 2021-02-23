@@ -2,12 +2,9 @@
 $default_timezone='Asia/Kolkata';
 
 $cookie_name='user';
-$url='http://192.168.0.112';
-//$url='http://localhost';
-if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
-	$root='/xampp/htdocs/ALAS';
-else
-	$root='/opt/lampp/htdocs/ALAS';
+//$url='http://192.168.0.112';
+$url='http://localhost';
+$root='/opt/lampp/htdocs/ALAS';
 $jsroot='/ALAS';
 
 $admin_email='example@gmail.com';

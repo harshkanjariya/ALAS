@@ -62,8 +62,10 @@ class Route{
 			// Check path match
 			if(preg_match('#'.$route['expression'].'#',$path,$matches)){
 
-				if ($access_denied and !$route['access_outside'] and (!isset($_SERVER['HTTP_REFERER']) or strpos($_SERVER['HTTP_REFERER'],$url)===false))
-					break;
+				if (isset($_SERVER['HTTP_REFERER'])) {
+					if ($access_denied and !$route['access_outside'] and strpos($_SERVER['HTTP_REFERER'], $url) === false)
+						break;
+				}
 				$path_match_found = true;
 
 				// Check method match

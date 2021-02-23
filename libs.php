@@ -1,3 +1,15 @@
+<?php
+function post(){
+echo '
+
+<script src="global.js"></script>
+<script src="assets/lib/js/dialog.js"></script>
+
+';
+}
+function pre(){
+	echo '
+
 <link rel="stylesheet" href="assets/lib/css/bootstrap.min.css">
 <script src="assets/lib/js/jquery.min.js"></script>
 <script src="assets/lib/js/bootstrap.min.js"></script>
@@ -12,3 +24,6 @@
 <link href="assets/lib/css/dialog.css" rel="stylesheet">
 <link href="global.css" rel="stylesheet">
 <script src="security.js"></script>
+	
+';
+}

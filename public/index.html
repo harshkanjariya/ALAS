@@ -1,7 +1,6 @@
 <html lang="en">
 <head>
     <title>ALAS</title>
-	<?php pre(); ?>
     <link href="assets/css/abc.css" rel="stylesheet">
 </head>
 <body>
@@ -11,26 +10,19 @@
         <td>Name</td>
         <td>Password</td>
     </tr>
-	<?php
-	$arr = array(
-	        "abc"=>array(
-	            "def"=>"qwer",
-                "ghi"=>"tyui"
-            )
-    );
-	$str = json_encode($arr);
-	$cipher = encrypt($str);
-	?>
 </table>
 <div>
-    <input type="text" id="txt" name="txt" value="{{{abc,def}}}"/>
+    <form action="index.php" method="post">
+        <label for="txt"></label>
+        <input type="text" id="txt" name="txt" value="{{{abc,def}}}"/>
+        <input type="submit">
+    </form>
     <div class="hello">hii</div>
 </div>
 <div id="mydiv">{{{{{{{y}}}}}}}</div>
 <a href="pwa">click</a>
-<?php post(); ?>
 <script type="text/javascript">
-    var alas_data = '<?=$cipher?>';
+    var alas_data = '';
     var x='abc,def';
     var y='x';
 </script>
