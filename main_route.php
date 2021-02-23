@@ -51,7 +51,7 @@ Route::add('[a-zA-Z0-9/_\.\-]+\.js',function (){
 	require(__DIR__.'/public/'.$uri);
 });
 Route::add('(index.php)?',function(){
-	global $url,$root,$jsroot,$cookie_name;
+	global $url,$root,$jsroot,$cookie_name,$lang;
 	require(__DIR__.'/public/index.php');
 },'',true);
 Route::run();

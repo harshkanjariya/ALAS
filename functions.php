@@ -1,5 +1,6 @@
 <?php
 require(__DIR__.'/config.php');
+require(__DIR__.'/language.php');
 require(__DIR__.'/security.php');
 require(__DIR__.'/extra_functions.php');
 require(__DIR__ . '/main_classes/Database.class.php');

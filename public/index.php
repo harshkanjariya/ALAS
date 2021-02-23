@@ -11,7 +11,7 @@ if (isset($_POST['txt'])){
     <link href="assets/css/abc.css" rel="stylesheet">
 </head>
 <body>
-<img src="assets/bird.jpg" alt="bird">
+<img src="assets/bird.jpg" alt="bird" style="width:100px;height:100px;">
 <table>
     <tr>
         <td>Name</td>
@@ -37,17 +37,15 @@ if (isset($_POST['txt'])){
     <div class="hello">hii</div>
 </div>
 <div id="mydiv">{{{{{{{y}}}}}}}</div>
-
+<a href="pwa">click</a>
+<?php
+echo $GLOBALS[$lang]['greeting'];
+?>
 <?php require("$root/public/post_libs.php"); ?>
 <script type="text/javascript">
     var alas_data = '<?=$cipher?>';
     var x='abc,def';
     var y='x';
-    Dialog.alert({
-        message:'hello'
-    });
-    applyScriptables();
-    applyScriptables();
 </script>
 </body>
 </html>
