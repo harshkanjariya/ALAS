@@ -1,8 +1,6 @@
 <?php
 class User{
-    public $value;
-    function __construct(){
-    }
+
     function select(){
         return db()->select('users');
     }

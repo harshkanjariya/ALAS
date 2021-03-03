@@ -36,6 +36,23 @@ function prt($ar){
 		echo $ar;
 	echo "</pre>";
 }
+function compile_alas($match){
+	$match = $match[0];
+	$match = substr($match,2,strlen($match)-4);
+//	$func = substr($match,0,strpos($match,'{'));
+//	$match = substr($match,strpos($match,'{')+1,strlen($match)-3-strlen($func));
+//	$params = explode(',',$match);
+	return $match;
+}
+function view($filename){
+	ob_start();
+	require($filename);
+	$content = ob_get_clean();
+	if (preg_match('/{[a-zA-Z0-9_]+{.*}}/',$content,$mattch)){
+		$content = preg_replace_callback('/{[a-zA-Z0-9_]+{.*}}/','compile_alas',$content);
+	}
+	echo $content;
+}
 function upload_file($file,$path){
 	$tmp=$file['tmp_name'];
 	if(move_uploaded_file($tmp,$path)){

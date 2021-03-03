@@ -51,6 +51,65 @@ function dateFormat(f,d){
 
 	return f;
 }
+function send(
+	form,
+	url='',
+	callback=undefined,
+	files=false,
+	before = null,
+){
+	form = $(form);
+	form[0].onsubmit=function(){return false;}
+
+	if (callback===undefined)
+		callback=function(result){console.log(result)};
+	if(url==='')
+		url=location.href;
+	form.find('[type=submit]').click(function(){
+		let makeRequest = true;
+		if (before!=null){
+			if(before(form) === false){
+				makeRequest=false;
+			}
+		}
+		if (!makeRequest)
+			return;
+		let ajax_obj = {
+			url: url,
+			success: function (result,status) {
+				try {
+					let res = JSON.parse(result);
+					callback(res);
+				}catch (e){
+					callback({
+						status: 'fail',
+						error: 'Something went wrong!',
+						result: result
+					});
+					if (debug){
+						console.log('Error parsing json');
+						console.log(result);
+					}
+				}
+			},
+			type: 'POST'
+		};
+		if(files===true) {
+			let d = new FormData(form[0]);
+			let fls = form.find('input[type=file]');
+			for (var i = 0; i < fls.length; i++) {
+				d.append(fls[i].name, fls[i].files[0]);
+			}
+			ajax_obj.cache=false;
+			ajax_obj.contentType=false;
+			ajax_obj.processData=false;
+			ajax_obj.data=d;
+		}else{
+			ajax_obj.data = $(form).serialize();
+		}
+		$.ajax(ajax_obj);
+	});
+}
 function updateData(el){
 	var e = el?el:document.body;
 	var inner = e.innerHTML;

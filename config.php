@@ -19,3 +19,5 @@ $database_name='test';
 
 $access_denied = true;
 $lang = 'en';
+
+$debug = true;
