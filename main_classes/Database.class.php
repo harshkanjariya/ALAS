@@ -60,9 +60,16 @@ class Database{
 		}
 		return $this->query($sql,$params);
 	}
-	function select_join($tables,$where=null,$params=null){
-	    $sql="select * from ";
-    }
+	function select_join($tables,$joins,$where=null,$params=null){
+		$sql = "select * from ".$tables[0];
+		for ($i=1; $i<count($tables); $i++){
+			$sql .= "\nleft join ".$tables[$i]." on ".$joins[$i-1];
+		}
+		if ($where){
+			$sql .= "\nwhere $where";
+		}
+		return $this->query($sql,$params);
+	}
 	function delete($table,$where=null,$params=null){
 		$sql="delete from $table";
 		if ($where!=null) {
