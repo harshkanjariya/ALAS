@@ -19,7 +19,8 @@
             )
     );
 	$str = json_encode($arr);
-	$cipher = encrypt($str);
+	$cipher = encrypt($str,'hello');
+	echo encrypt2('asdfghjkl','abc');
 	?>
 </table>
 <div>

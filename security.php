@@ -35,8 +35,8 @@ function encrypt2($message,$key){
 }
 function encrypt($msg,$k){
 	$l = intval(random_string(1,'1'));
-	$pre = random_string(4);
 	$post = random_string($l);
+	$pre = random_string(4);
 	$len = random_int(10,15);
 	$key = random_string($len);
 	$cipher = encrypt2($post.$msg,$key);
@@ -54,7 +54,8 @@ function decrypt2($message,$key){
 		$p ^= ord($key[$i]);
 	}
 	for ($i=0; $i < strlen($message); $i++){
-		$d = ord($message[$i]) ^ $p;
+		$d = ord($message[$i]);
+		$d ^= $p;
 		$d ^= ord($key[$i%$len]);
 		$d ^= $last;
 		$last = ord($message[$i]);
@@ -67,7 +68,6 @@ function decrypt($msg,$k){
 	$cipher = explode('::',$cipher);
 	if (count($cipher)!==2)return $msg;
 	$key = decrypt2($cipher[1],$k);
-	$key = substr($key,4);
 	$key = substr($key,4);
 	$len = intval(substr($key,0,2));
 	$key = substr($key,2);

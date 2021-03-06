@@ -2,8 +2,8 @@
 $default_timezone='Asia/Kolkata';
 
 $cookie_name='user';
-//$url='http://192.168.0.112';
-$url='http://localhost';
+$url='http://emplicheck.edu';
+//$url='http://localhost';
 $root='/opt/lampp/htdocs/ALAS';
 $jsroot='/ALAS';
 

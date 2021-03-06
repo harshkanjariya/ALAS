@@ -114,7 +114,7 @@ function updateData(el){
 	var e = el?el:document.body;
 	var inner = e.innerHTML;
 	var re = /{{{([^{}]+)}}}/g;
-	var dected = JSON.parse(Module.convert(alas_data));
+	var dected = JSON.parse(Module.convert(alas_data,'hello'));
 	inner = inner.replace(re, function (a, b) {
 		var keys = b.split(",");
 		var val = dected;

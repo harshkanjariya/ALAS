@@ -1610,7 +1610,8 @@ var tempI64;
 var ASM_CONSTS = {
   
 };
-
+function randomInt(a){ return Math.floor(Math.random()*a); }
+function randomString(s){ let t = random_string(s); const byteCount = (lengthBytesUTF8(t) + 1); const ptr = _malloc(byteCount); stringToUTF8(t, ptr, byteCount); return ptr; }
 
 
 
@@ -2638,11 +2639,19 @@ var asmLibraryArg = {
   "_emval_take_value": __emval_take_value,
   "abort": _abort,
   "emscripten_memcpy_big": _emscripten_memcpy_big,
-  "emscripten_resize_heap": _emscripten_resize_heap
+  "emscripten_resize_heap": _emscripten_resize_heap,
+  "randomInt": randomInt,
+  "randomString": randomString
 };
 var asm = createWasm();
 /** @type {function(...*):?} */
 var ___wasm_call_ctors = Module["___wasm_call_ctors"] = createExportWrapper("__wasm_call_ctors");
+
+/** @type {function(...*):?} */
+var ___em_js__randomString = Module["___em_js__randomString"] = createExportWrapper("__em_js__randomString");
+
+/** @type {function(...*):?} */
+var ___em_js__randomInt = Module["___em_js__randomInt"] = createExportWrapper("__em_js__randomInt");
 
 /** @type {function(...*):?} */
 var _malloc = Module["_malloc"] = createExportWrapper("malloc");
